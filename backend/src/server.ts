@@ -1,8 +1,8 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import express from "express";
+import bodyParser from "body-parser";
 
-import { connectDB } from './util/connectDB';
-import config from './util/config';
+import { connectDB } from "./util/connectDB";
+import config from "./util/config";
 
 const app = express();
 
@@ -20,9 +20,10 @@ app.use(function (req, res, next) {
   // next();
 });
 
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
+// Connect database
 connectDB();
 
 const port = config.severPort;
