@@ -1,15 +1,17 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
-import config from "./config";
+import config from './config';
 
-mongoose.set("strictQuery", false);
+mongoose.set('strictQuery', false);
 
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(config.mongoUrl);
     console.log(`Connect database successful: ${conn.connection.host}`);
   } catch (err) {
-    console.log("Connect error!!!", err);
+    console.log('Connect error!!!', err);
   }
 };
 

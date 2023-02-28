@@ -1,4 +1,4 @@
-import { model, Schema, Model } from "mongoose";
+import { model, Schema, Model } from 'mongoose';
 
 interface IMessage {
   id: string;
@@ -33,33 +33,33 @@ const MessageSchema: Schema<IMessage> = new Schema<IMessage>({
   type: String,
   reply_to: {
     message_id: String,
-    user_id: String
+    user_id: String,
   },
   forwarded_from: {
     message_id: String,
     user_id: String,
-    chat_id: String
+    chat_id: String,
   },
   is_read: {
     type: Boolean,
-    default: false
+    default: false,
   },
   is_deleted: {
     type: Boolean,
-    default: false
+    default: false,
   },
   is_private: {
     type: Boolean,
-    required: true
+    required: true,
   },
   is_edited: {
     type: Boolean,
-    default: false
+    default: false,
   },
   created_at: Number,
-  updated_at: Number
+  updated_at: Number,
 });
 
-const Message: Model<IMessage> = model("Message", MessageSchema);
+const Message: Model<IMessage> = model('Message', MessageSchema);
 
 export default Message;

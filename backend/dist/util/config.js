@@ -1,36 +1,43 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
-const dotenv_1 = __importDefault(require("dotenv"));
-// Parsing the env file.
-dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../config/dev.env") });
-// Loading process.env as ENV interface
-const getConfig = () => {
-    return {
-        NODE_ENV: process.env.NODE_ENV,
-        PORT: process.env.PORT ? Number(process.env.PORT) : undefined,
-        MONGO_URL: process.env.MONGO_URL,
-    };
-};
-// Throwing an Error if any field was undefined we don't
-// want our app to run if it can't connect to DB and ensure
-// that these fields are accessible. If all is good return
-// it as Config which just removes the undefined from our type
-// definition.
-const getSanitzedConfig = (config) => {
-    console.log("why?", config);
-    for (const [key, value] of Object.entries(config)) {
-        console.log("value: ", value);
-        if (value === undefined) {
-            throw new Error(`Missing key ${key} in config.env`);
-        }
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
-    return config;
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
-const config = getConfig();
-const sanitizedConfig = getSanitzedConfig(config);
-exports.default = sanitizedConfig;
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv = __importStar(require("dotenv"));
+dotenv.config();
+exports.default = {
+    severPort: (_a = Number(process.env.PORT)) !== null && _a !== void 0 ? _a : '',
+    mongoUrl: (_b = process.env.MONGO_URL) !== null && _b !== void 0 ? _b : '',
+    nodeEnv: (_c = process.env.NODE_ENV) !== null && _c !== void 0 ? _c : '',
+};
+// declare global {
+//   namespace NodeJS {
+//     interface ProcessEnv {
+//       severPort: number;
+//       mongoUrl: string;
+//       nodeEnv: string;
+//     }
+//   }
+// }
 //# sourceMappingURL=config.js.map

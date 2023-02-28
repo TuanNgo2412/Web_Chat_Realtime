@@ -1,7 +1,15 @@
 export enum ChatType {
-  ServiceMessage = " service-message",
-  Text = "text",
-  Image = "image",
-  Video = "video",
-  Voice = "voice"
+  ServiceMessage = ' service-message',
+  Text = 'text',
+  Image = 'image',
+  Video = 'video',
+  Voice = 'voice',
+}
+
+export interface ModelName {
+  Chat?: object;
+  Event?: object;
+  GroupChat?: object;
+  Message?: object;
+  User?: object;
 }

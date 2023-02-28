@@ -1,4 +1,4 @@
-import { model, Schema, Model } from "mongoose";
+import { model, Schema, Model } from 'mongoose';
 
 interface IUser {
   id: string;
@@ -21,20 +21,9 @@ const UserSchema = new Schema<IUser>({
   gender: Number,
   token: { type: String, unique: true },
   created_at: Number,
-  updated_at: Number
+  updated_at: Number,
 });
 
-const User: Model<IUser> = model("User", UserSchema);
-
-// User.create({
-//   username: "Tuan Ngo",
-//   password: "abcdef",
-//   firstname: "Tuan",
-//   lastname: "Ngo",
-//   gender: 1,
-//   token: "asdasfqwe123sada@hadaw"
-// }).then((data) => {
-//   console.log("schema: ", data);
-// });
+const User: Model<IUser> = model('User', UserSchema);
 
 export default User;
