@@ -4,7 +4,8 @@ import LoginController from '../controllers/LoginController';
 
 const router = express.Router();
 
-router.post('/register', LoginController.register);
+router.post('/login', LoginController.login);
+router.post('/register', LoginController.createNewUser);
 router.get('/register-page', LoginController.registerPage);
 router.get('/', LoginController.home);
 

@@ -13,13 +13,19 @@ interface IUser {
 }
 
 const UserSchema = new Schema<IUser>({
-  id: { type: String, unique: true },
-  username: String,
-  password: String,
-  firstname: String,
-  lastname: String,
-  gender: Number,
-  token: { type: String, unique: true },
+  id: { type: String, required: true, unique: true },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
+  gender: { type: Number, required: true },
+  token: {
+    type: String,
+    required: false,
+    index: true,
+    unique: true,
+    sparse: true,
+  },
   created_at: Number,
   updated_at: Number,
 });

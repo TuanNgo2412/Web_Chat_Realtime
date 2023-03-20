@@ -6,9 +6,6 @@ import { connectDB } from './util/connectDB';
 import config from './util/config';
 import route from './routes';
 
-// import dotenv from 'dotenv';
-// dotenv.config();
-
 const app = express();
 
 // app.use(function (req, res, next) {
@@ -25,8 +22,8 @@ const app = express();
 //   // next();
 // });
 
-// app.use(bodyParser.json({ limit: '50mb' }));
-// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 route(app);
 
