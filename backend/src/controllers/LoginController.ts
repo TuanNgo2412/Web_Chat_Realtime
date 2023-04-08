@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import { Token } from '../interfaces/common';
 import LoginService from '../services/LoginService';
 
 class LoginController {
@@ -19,27 +20,15 @@ class LoginController {
         }
     }
 
-    public async createNewUser(req: Request, res: Response) {
+    public async register(req: Request, res: Response) {
         try {
-            const { username, password, firstname, lastname, gender } =
-                req.body;
+            const { username, password, firstname, lastname, gender } = req.body;
             if (!username || !password)
                 res.status(400).json({
-                    errCode: -1,
                     message: 'Missing username or password parameter!!!!',
                 });
-            const token: string = await LoginService.createNewUser(
-                username,
-                password,
-                firstname,
-                lastname,
-                gender
-            );
-            return res.status(200).json({
-                errCode: 1,
-                message: 'Create new account successfully !!!',
-                token: token,
-            });
+            const data: Token = await LoginService.register(username, password, firstname, lastname, gender);
+            return res.status(200).json(data);
         } catch (error) {
             console.log('Error: ', error);
             res.status(500).json('Internal Server error');
@@ -51,13 +40,29 @@ class LoginController {
             const { username, password } = req.body;
             if (!username || !password) {
                 res.status(400).json({
-                    errCode: -1,
                     message: 'Missing username or password!',
                 });
             }
-            const token: string = await LoginService.login(username, password);
+            const data: Token = await LoginService.login(username, password);
+            return res.status(200).json(data);
+        } catch (error) {
+            console.log('Error: ', error);
+            res.status(500).json('Internal Server error');
+        }
+    }
+
+    public async refreshToken(req: Request, res: Response) {
+        try {
+            const refreshToken: string = req.body.refreshToken;
+
+            if (!refreshToken) {
+                return res.status(401).json({ message: `Missing refresh token` });
+            }
+
+            const data: Token = await LoginService.refreshToken(refreshToken);
+
             return res.status(200).json({
-                token: token,
+                data,
             });
         } catch (error) {
             console.log('Error: ', error);
